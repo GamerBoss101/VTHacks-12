@@ -1,7 +1,7 @@
 import { createClient } from "@propelauth/javascript";
 
 const authClient = createClient({
-    authUrl: "http://localhost:3000", // Replace with your actual auth URL
+    authUrl: "http://172.29.116.31", // Replace with your actual auth URL
     enableBackgroundTokenRefresh: true // Optional
 });
 
