@@ -1,2 +1,4 @@
-# VTHacks-12
+# Food Decisive 
 App for VTHacks
+
+
