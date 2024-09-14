@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from 'uuid';
 
 const reqString = {
     type: String,
@@ -6,7 +7,14 @@ const reqString = {
 }
 
 const UserSchema = new mongoose.Schema({
-    id: reqString,
+    id: reqString, 
+    recipes: Array,
+    dietaryRestrictions: Array,
+    firstName: String,
+    lastName: String,
+    email: String
+
+
 
 }, { timestamps: true });
 
@@ -16,23 +24,20 @@ export default class Users {
         this.upsert = { upsert: true };
     }
 
-    makeId(length) {
-        var result = [];
-        var characters = 'abcdefghijklmnopqrstuvwxyz012345678901234567890123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-          result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
-        }
-        return result.join('');
-    } 
 
     async create(user) {
         if(await this.model.findOne({ username: user.username }) || await this.model.findOne({ email: user.email })) return null;
         
-        let Id = this.makeId(5);
+        let Id = uuidv4();
+
 
         await this.model.findOneAndUpdate({ id: Id }, {
             id: Id,
+            recipes: user.recipes,
+            dietaryRestrictions: user.dietaryRestrictions,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.Email
         }, this.upsert);
         return await this.get(user.id);
     }
