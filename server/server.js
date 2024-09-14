@@ -17,6 +17,8 @@ const MongoServer = new Mongo(process.env.MONGO_URI);
 app.use(cors());
 app.set("mongo", MongoServer);
 
+let routePaths = [];
+
 async function loadFolder(filePath) {
     let files = [];
     fs.readdirSync(filePath).forEach(file => {
@@ -34,6 +36,7 @@ async function loadFiles(filePath) {
     if (file.default) {
         let route = new file.default();
         app.use(route.path, route.getRouter());
+        routePaths.push(route.path);
         console.log(`Loaded ${route.path}`);
     }
 }
@@ -57,6 +60,7 @@ try {
         app.use(handler);
     }, ms('1s'));
 }
+
 
 server.listen(process.env.PORT, () => {
     console.log(`listening on port http://localhost:${process.env.PORT}`);
