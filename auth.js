@@ -1,7 +1,7 @@
 import { createClient } from "@propelauth/javascript";
 
 const authClient = createClient({
-    authUrl: "http://172.29.116.31", // Replace with your actual auth URL
+    authUrl: "https://auth.fooddecisive.co", // Replace with your actual auth URL
     enableBackgroundTokenRefresh: true // Optional
 });
 
