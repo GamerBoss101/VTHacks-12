@@ -1,2 +1,102 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import { page } from '$app/stores';
+
+    console.log($page.data);
+</script>
+
+
+<header class="bg-dark">
+    <div class="container pt-4 pt-xl-5">
+        <div class="row pt-5">
+            <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                <div class="text-center">
+                    <p class="fw-bold text-success mb-2">Can't choose what to eat?</p>
+                    <h1 class="fw-bold">We've got you covered!</h1>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                    <p style="font-size: 26px;text-align: center;margin-right: -90px;">Here's How it works:</p>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"></div>
+                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="container bg-dark py-5">
+        <div class="py-5 p-lg-5">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col-lg-6 mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5" style="height: 235.188px;">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-circle text-success">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"></path>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"></path>
+                                </svg></div>
+                            <h5 class="fw-bold card-title">Create an Account</h5>
+                            <p class="text-muted card-text mb-4">Create an Account, so we can save your recipes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5" style="height: 235.188px;">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-circle text-success">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
+                                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"></path>
+                                </svg></div>
+                            <h5 class="fw-bold card-title">Fill out the Form</h5>
+                            <p class="text-muted card-text mb-4">Fill out the form and answer the questions. Make sure you provide any dietary restrictions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5" style="margin-bottom: 32px;">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pin-angle text-success">
+                                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"></path>
+                                </svg></div>
+                            <h5 class="fw-bold card-title">View Your Generated Recipe</h5>
+                            <p class="text-muted card-text mb-4">After filling out the form, we will generate a recipe!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5" style="height: 235.188px;">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-chat-quote text-success">
+                                    <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894m-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"></path>
+                                    <path d="M7.066 6.76A1.665 1.665 0 0 0 4 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"></path>
+                                </svg></div>
+                            <h5 class="fw-bold card-title"><strong>Rate The Recipe Generated</strong></h5>
+                            <p class="text-muted card-text mb-4">Rate the Generated Recipe to provide feedback for better generated recipes in the future.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 mt-5">
+    <div class="container py-5" style="padding: 48px 12px;padding-top: 48px;">
+        <div class="row mb-5" style="height: 200px;">
+            <div class="col-md-8 col-xl-6 text-center mx-auto" style="height: 200px;">
+                <h2 class="fw-bold" style="font-size: 60px;"><a href="/survey"><strong>Get Started</strong></a></h2>
+                <p class="text-muted" style="font-size: 32px;color: var(--bs-emphasis-color);">Decide Your Next Bite!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <section class="py-5">
+        <div class="container text-center py-5">
+            <p class="mb-4" style="font-size: 1.6rem;">Submitted for VTHacks-12</p>
+        </div>
+    </section>
+</section>
+
+<style>
+
+</style>

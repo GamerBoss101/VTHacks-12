@@ -4,7 +4,7 @@ export default class UsersAPI extends APIRoute {
     constructor() {
         super('/users');
 
-        this.addSubRoute('/create', 'post', createUser);
+        this.addSubRoute('/create', 'post', this.createUser);
     }
 
     async get(req, res) {

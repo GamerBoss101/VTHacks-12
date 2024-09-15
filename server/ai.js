@@ -21,7 +21,6 @@ const response = await ollama.chat({
             "Preheat oven to 350 degrees"
         ]
     }
-    
     `
     }],
 });
