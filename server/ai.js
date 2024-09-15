@@ -1,10 +1,6 @@
 import {Ollama} from 'ollama'
 
-const ollama = new Ollama({ host: '172.29.186.121:11434', fetch: {
-    headers: {
-        'bypass-tunnel-reminder': 'lol'
-    }
-}});
+const ollama = new Ollama({ host: process.env.AI_URL });
 
 // const response = await ollama.chat({
 //   model: 'llama3:latest',
@@ -66,9 +62,6 @@ const questions = [
 // ]
 
 export default class FDAI {
-    constructor(){
-        this.ai = new Ollama({ host: process.env.AI_URL });
-    } 
 
     async suggestFood(questionAmount, answers, restrictions) {
 
@@ -79,7 +72,7 @@ export default class FDAI {
         }
 
         const response = await ollama.generate({
-            model: 'llama3:latest',
+            model: 'meta-llama-3-1-8b-1',
             format: "json",
             prompt:
             `Give one food suggestion for these question answers and then generate a recipe.

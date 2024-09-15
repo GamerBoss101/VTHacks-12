@@ -28,6 +28,8 @@ export default class RecipeAPI extends APIRoute {
 
         let aiResult = await ai.suggestFood(recipe.currentQuestion, recipe.answers, recipe.restrictions);
 
+        console.log(aiResult);
+
         let suggestFood = JSON.parse(aiResult.response);
 
         let result = await db.create(suggestFood);

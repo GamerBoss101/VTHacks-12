@@ -1,14 +1,7 @@
-import localtunnel from 'localtunnel';
+import { tunnelmole } from 'tunnelmole';
 
-(async () => {
-  const tunnel = await localtunnel({ port: 11424 });
+const url = await tunnelmole({
+  port: 11434
+});
 
-  // the assigned public url for your tunnel
-  // i.e. https://abcdefgjhij.localtunnel.me
-  console.log(tunnel.url);
-
-  tunnel.on('close', () => {
-    // tunnels are closed
-    console.log('Tunnel closed');
-  });
-})();
+console.log(`Your localtunnel is available at ${url}`);
