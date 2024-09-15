@@ -14,7 +14,7 @@
     <td>{data.name}</td>
     <td>{data.ingredients.length || 0}</td>
     <td>{data.instructions.length || 0}</td>
-    <td>{Math.round(data.rating/((data.ratingCount == 0 ) ? data.ratingCount++ : data.ratingCount))} / 5</td>
+    <td>{Math.round(data.rating/((data.ratingCount == 0 ) ? 1 : data.ratingCount))} / 5</td>
     <td>
         <button on:click={openRecipe} class="btn btn-primary">Open</button>
     </td>

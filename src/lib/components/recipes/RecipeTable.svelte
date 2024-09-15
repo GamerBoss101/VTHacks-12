@@ -13,16 +13,14 @@
 
 </script>
 
-<table class="table my-0" id="dataTable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Ingredients</th>
-            <th>Instructions</th>
-            <th>Rating</th>
-            <th></th>
-        </tr>
-    </thead>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Ingredients</th>
+        <th>Instructions</th>
+        <th>Rating</th>
+        <th></th>
+    </tr>
     <tbody>
         {#if recipes}
             {#each recipes as recipe}
@@ -34,10 +32,11 @@
 
 <style>
     table {
-        width: 90%;
+        width: 100%;
         margin: auto;
-        background-color: var(--bs-dark-rgb);
+        background-color: #141618;
         border-radius: 10px;
+        max-height: 500px;
     }
 
     th {
@@ -48,6 +47,6 @@
     }
 
     tr:nth-child(odd) {
-        background-color: var(--bs-dark-rgb);
+        background-color: #1c1c22;
     }
 </style>

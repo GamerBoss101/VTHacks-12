@@ -79,9 +79,9 @@
     </div>
 </section>
 <section class="py-5 mt-5">
-    <div class="container py-5" style="padding: 48px 12px;padding-top: 48px;">
-        <div class="row mb-5" style="height: 200px;">
-            <div class="col-md-8 col-xl-6 text-center mx-auto" style="height: 200px;">
+    <div class="container" style="padding: 25px 12px;">
+        <div class="row mb-5" >
+            <div class=" text-center">
                 { #if $page.data.authInfo }
                     <h2 class="fw-bold" style="font-size: 60px;"><a href="/survey"><strong>Decide Your Next Bite!</strong></a></h2>
                     <RecipeTable />
@@ -91,6 +91,6 @@
                 { /if }
             </div>
         </div>
-        <p style=" margin: auto; text-align:center; font-size: 1.6rem;">Submitted for VTHacks-12</p>
+        <p style="margin: auto; text-align:center; font-size: 1.6rem;">Submitted for VTHacks-12</p>
     </div>
 </section>
