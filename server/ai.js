@@ -81,8 +81,7 @@ class aiClass{
             model: 'llama3:latest',
             messages: [{ role: 'user', content: 
             `Give one food suggestion this question answers.
-
-
+                
             `
             }],
         });
