@@ -11,6 +11,7 @@
                 numQuestion: 5
             }
         });
+        location.href = "#form";
     }
 
     function open10Survey(questions) {
@@ -21,6 +22,7 @@
                 numQuestion: 10
             }
         });
+        location.href = "#form";
     }
 
     function open15Survey(questions) {
@@ -31,6 +33,7 @@
                 numQuestion: 15
             }
         });
+        location.href = "#form";
     }
     
 
@@ -61,4 +64,8 @@
 </div>
 <br>
 <br>
-<p class="card-text" style="--bs-body-font-size: 1rem;font-size: 24px;"><strong><span style="background-color: transparent;">The more questions you answer, the more personalized your recommendation will be!</span></strong></p>
+<p style="text-align:center !important;  --bs-body-font-size: 1rem;font-size: 24px;">
+    <strong>
+        <span style="background-color: transparent;">The more questions you answer, the more personalized your recommendation will be!</span>
+    </strong>
+</p>

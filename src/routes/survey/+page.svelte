@@ -18,12 +18,14 @@
 
 <section class="py-5">
     <div class="container py-5">
-        <div class="row mb-5" style="padding-bottom: 20px;">
+        <div class="row mb-5" style="padding-bottom: 5px;">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
-                <h2 class="fw-bold"><strong><span style="background-color: transparent;">How many questions do you want to answer?</span></strong></h2>
+                <h2 id="form" class="fw-bold"><strong>
+                    <span style="background-color: transparent;">How many questions do you want to answer?</span></strong>
+                </h2>
             </div>
         </div>
-        <div id="form" class="card" style="padding-top: 20px;padding-bottom: 100px;">
+        <div class="card" style="padding-top: 20px;padding-bottom: 100px;">
             <div bind:this={parentDiv} class="card-body"></div>
         </div>
     </div>

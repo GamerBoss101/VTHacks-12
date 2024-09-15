@@ -6,6 +6,8 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
 
+    import SignIn from './SignIn.svelte';
+
     let formData = writable({
         answers: [],
         currentQuestion: 1,
@@ -14,6 +16,8 @@
 
     export let numQuestion = 0;
     let inputEle;
+    let submitEle;
+    let modelEle;
 
     const questions = [
         "Is this for breakfast, lunch, dinner, snack or dessert?",
@@ -40,6 +44,13 @@
                 button.classList.toggle('active');
             });
         });
+
+        setTimeout(() => {
+            if (!$page.data.authInfo) {
+                let modal = new bootstrap.Modal(modelEle);
+                modal.show();
+            }
+        }, 1000);
     });
 
     function nextQuestion() {
@@ -51,6 +62,9 @@
     }
 
     async function submitForm() {
+
+        submitEle.disabled = true;
+        submitEle.innerText = 'Finding your food...';
 
         let obj = $formData;
         obj.answers.push(inputEle.value);
@@ -73,18 +87,35 @@
 
         recipeData = await recipeData.json();
 
-        console.log(recipeData);
-
         goto(`/food/${recipeData.id}`, { replaceState: true });
     }
+
+    function signIn() {
+        goto("https://auth.fooddecisive.co/");
+    }
+    
 
 </script>
 
 <div class="container">
+    { #if !$page.data.authInfo }
+        <div bind:this={modelEle} class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <SignIn />
+                        <button type="button" class="btn btn-primary" on:click={signIn}>Sign In</button>
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    { /if }
     <div class="row mb-5">
-        <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <h2 class="fw-bold">Question {$formData.currentQuestion}&nbsp;</h2>
-            <p class="text-muted">Question {$formData.currentQuestion} of {numQuestion}</p>
+        <div class="text-center">
+            <h2 class="fw-bold">Question {$formData.currentQuestion} of {numQuestion}</h2>
         </div>
     </div>
     <div class="row">
@@ -134,7 +165,7 @@
     <div class="row">
         <div class="col">
             {#if $formData.currentQuestion === numQuestion}
-                <button class="btn btn-primary" type="button" on:click={submitForm} >Submit</button>
+                <button bind:this={submitEle} class="btn btn-primary" type="button" on:click={submitForm} >Submit</button>
             {:else}
                 <button class="btn btn-primary" type="button" on:click={nextQuestion} >Next</button>
             {/if}

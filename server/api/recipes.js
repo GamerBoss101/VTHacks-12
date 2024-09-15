@@ -28,9 +28,8 @@ export default class RecipeAPI extends APIRoute {
 
         let aiResult = await ai.suggestFood(recipe.currentQuestion, recipe.answers, recipe.restrictions);
 
-        console.log(aiResult);
-
         let suggestFood = JSON.parse(aiResult.response);
+        suggestFood.userID = recipe.userID;
 
         let result = await db.create(suggestFood);
 
@@ -38,6 +37,7 @@ export default class RecipeAPI extends APIRoute {
     }
 
     async rate(req, res) {
+
         let db = req.app.get('mongo').recipes;
 
         let recipe = await db.get(req.params.id);
@@ -54,9 +54,7 @@ export default class RecipeAPI extends APIRoute {
             return;
         }
 
-        recipe.rating = rating;
-
-        let result = await db.update(req.params.id, { rating: rating });
+        let result = await db.update(req.params.id, { rating: recipe.rating + parseInt(rating), ratingCount: recipe.ratingCount + 1 });
 
         res.send(result);
     }

@@ -4,18 +4,17 @@
 //     enableBackgroundTokenRefresh: true,
 // });
 
-export async function load() {
+// export async function load() {
 
+//     const authInfo = await authClient.getAuthenticationInfoOrNull();
+//     console.log("authInfo", authInfo)
+//     if (authInfo) {
+//         console.log("User is logged in as", authInfo.user.email)
+//     } else {
+//         console.log("User is not logged in")
+//     }
 
-    // const authInfo = await authClient.getAuthenticationInfoOrNull();
-    // console.log("authInfo", authInfo)
-    // if (authInfo) {
-    //     console.log("User is logged in as", authInfo.user.email)
-    // } else {
-    //     console.log("User is not logged in")
-    // }
-
-    // return {
-    //     authInfo: authInfo ? authInfo : null
-    // };
-}
+//     return {
+//         authInfo: authInfo ? authInfo : null
+//     };
+// }

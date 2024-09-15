@@ -1,5 +1,6 @@
 <script>
     // @ts-nocheck
+    import '$lib/food.css';
     import { page } from '$app/stores';
     import { onMount } from "svelte";
 
@@ -9,6 +10,8 @@
     let IngredientsEle;
 
     $: showRecipe = false;
+
+    let preRating = Math.round(foodData.rating / foodData.ratingCount);
 
     function CLshowRecipe() {
         showRecipe = true;
@@ -23,6 +26,35 @@
             }).join('\n');
         }, 500);
     }
+
+    async function rateFoodSuggestion(rating) {
+        const response = await fetch(`/api/recipes/${foodData.id}/rate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rating })
+        });
+    }
+
+    onMount(() => {
+        const stars = document.querySelectorAll('.star');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                const rating = star.dataset.rating;
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+
+                rateFoodSuggestion(rating);
+            }, { once: true });
+        });
+    });
 
 </script>
 
@@ -89,6 +121,16 @@
                 </div>
             {/if}
             <h4 class="card-title" style="text-align: center;">Rate Your Suggested Food!</h4>
+            <div style="margin: auto;" class="star-rating">
+
+                {#each [1, 2, 3, 4, 5] as rating}
+                    {#if preRating >= rating}
+                        <span class="star active" data-rating={rating} style="font-size: 50px;">&#9733;</span>
+                    {:else}
+                        <span class="star" data-rating={rating} style="font-size: 50px;">&#9733;</span>
+                    {/if}
+                {/each}
+            </div>
             <br>
             <br>
         </div>

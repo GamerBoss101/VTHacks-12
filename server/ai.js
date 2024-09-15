@@ -72,7 +72,7 @@ export default class FDAI {
         }
 
         const response = await ollama.generate({
-            model: 'meta-llama-3-1-8b-1',
+            model: 'llama3:latest',
             format: "json",
             prompt:
             `Give one food suggestion for these question answers and then generate a recipe.

@@ -1,0 +1,18 @@
+.star-rating {
+    font-size: 0;
+}
+
+.star-rating .star {
+    display: inline-block;
+    font-size: 2rem;
+    color: #ffffff;
+    transition: transform 200ms;
+}
+
+.star-rating .star.active {
+    color: #ff6a00;
+}
+
+.star-rating .star:hover {
+    transform: scale(1.5);
+}
