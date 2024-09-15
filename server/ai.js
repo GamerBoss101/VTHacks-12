@@ -1,6 +1,10 @@
 import {Ollama} from 'ollama'
 
-const ollama = new Ollama({ host: '172.29.186.121:11434' })
+const ollama = new Ollama({ host: '172.29.186.121:11434', fetch: {
+    headers: {
+        'bypass-tunnel-reminder': 'lol'
+    }
+}});
 
 // const response = await ollama.chat({
 //   model: 'llama3:latest',
@@ -41,7 +45,8 @@ const questions = [
     "Do you prefer recipes that yield leftovers (great for meal prep) or single-serving portions?",
     "Are you looking for budget-friendly options, or are you willing to splurge a bit for a special meal?",
     "What’s the calorie range you want your meal to stay in? (You can specify yes or no)"
-]
+];
+
 // const testAnswers =[
 //     "Lunch",
 //     "Italian",
@@ -70,7 +75,7 @@ export default class FDAI {
         let qaA = "";
 
         for(let i = 0; i < questionAmount; i++) {
-            qaA += `Q${i}. ${answers[i]}\nA${i}. ${answers[i]}`
+            qaA += `Q${i}. ${questions[i]}\nA${i}. ${answers[i]}`
         }
 
         const response = await ollama.generate({
