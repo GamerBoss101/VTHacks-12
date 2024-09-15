@@ -61,7 +61,7 @@ const testAnswers =[
     "800-1000"
 ]
 
-const restrictions=[
+const restrictions =[
 
 ]
 
