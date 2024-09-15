@@ -8,12 +8,18 @@
 
     import SignIn from './SignIn.svelte';
 
-    console.log($page.data.authInfo);
+    let userID;
+
+    if ($page.data.authInfo) {
+        userID = $page.data.authInfo.user.userId;
+    } else {
+        userID = null;
+    }
 
     let formData = writable({
         answers: [],
         currentQuestion: 1,
-        userID: $page.data.authInfo.user.userId || null,
+        userID: userID
     });
 
     export let numQuestion = 0;

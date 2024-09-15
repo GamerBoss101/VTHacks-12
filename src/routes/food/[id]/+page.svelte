@@ -64,8 +64,8 @@
         <div class="card">
             <div class="card-body mx-auto">
                 <h4 class="card-title" style="text-align: center; font-size: 50px;">You Want</h4>
-                <p class="card-text mx-auto" style="font-size: 60px;font-weight: bold;text-align: center;">{foodData.name}</p>
-                <p class="card-text">{foodData.description}</p>
+                <p class="card-text" style="font-size: 60px;font-weight: bold;text-align: center;">{foodData.name}</p>
+                <p class="card-text" style="text-align: center;">{foodData.description}</p>
             </div>
             {#if !showRecipe}
                 <div class="row">
