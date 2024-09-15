@@ -10,18 +10,16 @@ const reqString = {
 
 const recipesSchema = new mongoose.Schema({
     id: reqString, 
+    description: String,
     userID: String,
     ingredients: Array,
-    productName: String,
+    instructions: Array,
+    name: String,
     nutritionFacts: Object, 
     rating: Number,
     cuisine: String,
     expense: Number,
     mealType: Object
-
-
-
-
 }, { timestamps: true });
 
 export default class Recipes {
@@ -39,18 +37,15 @@ export default class Recipes {
             id: Id,
             userID: recipe.userID,
             ingredients: recipe.ingredients,
-            productName: recipe.productName,
+            description: recipe.description,
+            name: recipe.name,
             nutritionFacts: recipe.nutritionFacts,
-            rating: recipe.rating,
             cuisine: recipe.cuisine,
             expense: recipe.expense,
-            mealType: recipe.mealType
-
-            
-            
-
+            mealType: recipe.mealType,
+            instructions: recipe.instructions
         }, this.upsert);
-        return await this.get(user.id);
+        return await this.get(Id);
     }
 
     async get(Id) {

@@ -1,11 +1,15 @@
 <script>
     // @ts-nocheck
+    import '../../survey.css';
     import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
 
     let formData = writable({
         answers: [],
-        currentQuestion: 1
+        currentQuestion: 1,
+        userID: $page.data.authInfo ? $page.data.authInfo.id : null,
     });
 
     export let numQuestion = 0;
@@ -29,22 +33,54 @@
         "What’s the calorie range you want your meal to stay in? (You can specify yes or no)"
     ];
 
-    console.log(numQuestion);
+    onMount(() => {
+        const buttons = document.querySelectorAll('.btn-info');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+            });
+        });
+    });
 
     function nextQuestion() {
         if ($formData.currentQuestion === numQuestion) return;
 
         $formData.currentQuestion++;
         $formData.answers.push(inputEle.value);
+        inputEle.value = '';
     }
 
-    function submitForm() {
-        
+    async function submitForm() {
+
+        let obj = $formData;
+        obj.answers.push(inputEle.value);
+        obj.restrictions = [];
+
+        const buttons = document.querySelectorAll('.btn-info');
+        buttons.forEach(button => {
+            if (button.classList.contains('active')) {
+                obj.restrictions.push(button.innerText);
+            }
+        });
+
+        let recipeData = await fetch('/api/recipes/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        });
+
+        recipeData = await recipeData.json();
+
+        console.log(recipeData);
+
+        goto(`/food/${recipeData.id}`, { replaceState: true });
     }
 
 </script>
 
-<div class="container py-5">
+<div class="container">
     <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
             <h2 class="fw-bold">Question {$formData.currentQuestion}&nbsp;</h2>
@@ -57,7 +93,7 @@
                 <div class="card-body mx-auto">
                     <p class="card-text" style="font-size: 40px;">
                         <strong>
-                            <span style="background-color: transparent;">{questions[$formData.currentQuestion]}</span>
+                            <span style="background-color: transparent;">{questions[$formData.currentQuestion-1]}</span>
                         </strong>
                     </p>
                 </div>
@@ -67,6 +103,31 @@
     <div class="row">
         <div class="col">
             <input type="text" bind:this={inputEle} >
+        </div>
+    </div>
+    <br>
+    <h4 class="card-title" style="text-align: center;">Select Dietary Restriction</h4>
+    <div class="row">
+        <div class="col">
+            <div class="btn-group" role="group" style="width: 100%;">
+                <button class="btn btn-info" type="button">Vegetarian</button>
+                <button class="btn btn-info" type="button">Vegan</button>
+                <button class="btn btn-info" type="button">Gluten-free</button>
+                <button class="btn btn-info" type="button">Lactose-free</button>
+                <button class="btn btn-info" type="button">Nut-free</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="btn-group" role="group" style="width: 100%;">
+                <button class="btn btn-info" type="button">Halal</button>
+                <button class="btn btn-info" type="button">Kosher</button>
+                <button class="btn btn-info" type="button">Keto</button>
+                <button class="btn btn-info" type="button">Diabetic</button>
+                <button class="btn btn-info" type="button">Pescatarian</button>
+            </div>
         </div>
     </div>
     <br>
@@ -97,6 +158,11 @@
         font-size: 24px;
         width: 100%;
         height: 50px;
+    }
+
+    .container {
+        display: block;
+        min-width: 70% !important;
     }
 
 </style>

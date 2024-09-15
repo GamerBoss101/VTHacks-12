@@ -2,28 +2,28 @@ import {Ollama} from 'ollama'
 
 const ollama = new Ollama({ host: '172.29.186.121:11434' })
 
-const response = await ollama.chat({
-  model: 'llama3:latest',
-  messages: [{ role: 'user', content: 
-    `Generate a recipe for blueberry muffins:
-    Format it in a json object like this and don't send any other text: 
-    {
-        "name": "Blueberry Muffins",
-        "description": "A delicious and healthy blueberry muffin recipe",
-        "nutritional_information": {},
-        ingredients: [
-            {
-                "name": "flour",
-                "quantity": "2 cups"
-            }
-        ],
-        instructions: [
-            "Preheat oven to 350 degrees"
-        ]
-    }
-    `
-    }],
-});
+// const response = await ollama.chat({
+//   model: 'llama3:latest',
+//   messages: [{ role: 'user', content: 
+//     `Generate a recipe for blueberry muffins:
+    // Format it in a json object like this and don't send any other text: 
+    // {
+    //     "name": "Blueberry Muffins",
+    //     "description": "A delicious and healthy blueberry muffin recipe",
+    //     "nutritional_information": {},
+    //     ingredients: [
+    //         {
+    //             "name": "flour",
+    //             "quantity": "2 cups"
+    //         }
+    //     ],
+    //     instructions: [
+    //         "Preheat oven to 350 degrees"
+    //     ]
+    // }
+//     `
+//     }],
+// });
 
 const questions = [
     "Is this for breakfast, lunch, dinner, snack or dessert?",
@@ -42,31 +42,27 @@ const questions = [
     "Are you looking for budget-friendly options, or are you willing to splurge a bit for a special meal?",
     "What’s the calorie range you want your meal to stay in? (You can specify yes or no)"
 ]
-const testAnswers =[
-    "Lunch",
-    "Italian",
-    "Healthy",
-    "Cheese",
-    "Beans",
-    "Moderate cook time",
-    "Chicken",
-    "Medium",
-    "Wine",
-    "Regular Day",
-    "Crispy",
-    "Oven,Microwave,Stove",
-    "few leftovers",
-    "Budget-Friendly",
-    "800-1000"
-]
+// const testAnswers =[
+//     "Lunch",
+//     "Italian",
+//     "Healthy",
+//     "Cheese",
+//     "Beans",
+//     "Moderate cook time",
+//     "Chicken",
+//     "Medium",
+//     "Wine",
+//     "Regular Day",
+//     "Crispy",
+//     "Oven,Microwave,Stove",
+//     "few leftovers",
+//     "Budget-Friendly",
+//     "800-1000"
+// ]
 
-const restrictions=[
-
-]
-
-class aiClass{
+export default class FDAI {
     constructor(){
-        this.ai = new Ollama({ host: '172.29.186.121:11434' });
+        this.ai = new Ollama({ host: process.env.AI_URL });
     } 
 
     async suggestFood(questionAmount, answers, restrictions) {
@@ -77,19 +73,52 @@ class aiClass{
             qaA += `Q${i}. ${answers[i]}\nA${i}. ${answers[i]}`
         }
 
-        const response = await ollama.chat({
+        const response = await ollama.generate({
             model: 'llama3:latest',
-            messages: [{ role: 'user', content: 
-            `Give one food suggestion this question answers.
-                
+            format: "json",
+            prompt:
+            `Give one food suggestion for these question answers and then generate a recipe.
+            ${qaA}
+            Consider the following restrictions: ${restrictions.join(", ")}
+            Format it in a json object like this example: 
+            {
+                "name": "Blueberry Muffins",
+                "description": "A delicious and healthy blueberry muffin recipe",
+                "cuisineType": "American",
+                "estimatedExpense": 5,
+                "mealType": "Breakfast",
+                "nutritionFacts": {
+                    "calories": "350-400",
+                    "fat": "15-20g",
+                    "carbs": "30-40g",
+                    "protein": "35-40g"
+                },
+                ingredients: [
+                    {
+                        "name": "flour",
+                        "quantity": "2 cups"
+                    }
+                ],
+                instructions: [
+                    "Preheat oven to 350 degrees"
+                ]
+            }
+            Do not send any other text other than the json object and or add extra text to the json object.
             `
-            }],
         });
+
+        this.clearChatHistory();
+        return response;
     }
 
 
-}
+    async clearChatHistory() {
+        await ollama.generate({
+            model: 'llama3:latest',
+            prompt: "clear all previous responses",
+            format: "json"
+        });
+    }
 
-console.log(response)
-console.log(response.message.content)
+}
 

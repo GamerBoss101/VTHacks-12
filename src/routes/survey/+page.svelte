@@ -24,7 +24,7 @@
             </div>
         </div>
         <div id="form" class="card" style="padding-top: 20px;padding-bottom: 100px;">
-            <div bind:this={parentDiv} class="card-body mx-auto"></div>
+            <div bind:this={parentDiv} class="card-body"></div>
         </div>
     </div>
 </section>

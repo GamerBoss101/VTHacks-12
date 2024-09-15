@@ -1,9 +1,3 @@
-<script>
-    import { page } from '$app/stores';
-
-    console.log($page.data);
-</script>
-
 
 <header class="bg-dark">
     <div class="container pt-4 pt-xl-5">

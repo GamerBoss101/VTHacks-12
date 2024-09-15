@@ -3,11 +3,7 @@
     import Survey from "./Survey.svelte";
     export let parentDiv;
 
-    console.log(parentDiv);
-
     function open5Survey(questions) {
-        console.log(questions);
-
         parentDiv.innerHTML = "";
         new Survey({
             target: parentDiv,
@@ -18,8 +14,6 @@
     }
 
     function open10Survey(questions) {
-        console.log(questions);
-
         parentDiv.innerHTML = "";
         new Survey({
             target: parentDiv,
@@ -30,8 +24,6 @@
     }
 
     function open15Survey(questions) {
-        console.log(questions);
-
         parentDiv.innerHTML = "";
         new Survey({
             target: parentDiv,
