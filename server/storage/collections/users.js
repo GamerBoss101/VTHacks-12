@@ -13,9 +13,6 @@ const UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String
-
-
-
 }, { timestamps: true });
 
 export default class Users {
