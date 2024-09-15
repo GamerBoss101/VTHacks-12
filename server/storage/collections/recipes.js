@@ -46,7 +46,7 @@ export default class Recipes {
             mealType: recipe.mealType,
             instructions: recipe.instructions,
             ratingCount: 0,
-            rating: 0
+            rating: 0,
         }, this.upsert);
         return await this.get(Id);
     }
@@ -56,20 +56,12 @@ export default class Recipes {
     }
 
     async getAll(query) {
-        let data = await this.model.find(query);
-        return data
+        return await this.model.find(query);
     }
 
     async update(Id, data) {
         if(!(await this.get(Id))) return null;
         await this.model.findOneAndUpdate({ id: Id }, data, this.upsert);
-        return await this.get(Id);
-    }
-
-    async increment(Id, field, amount) {
-        let result = await this.get(Id);
-        if(!result) return null;
-        
         return await this.get(Id);
     }
 

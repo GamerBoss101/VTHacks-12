@@ -1,3 +1,8 @@
+<script>
+    import { page } from '$app/stores';
+    import RecipeTable from '$lib/components/recipes/RecipeTable.svelte';
+</script>
+
 
 <header class="bg-dark">
     <div class="container pt-4 pt-xl-5">
@@ -77,20 +82,15 @@
     <div class="container py-5" style="padding: 48px 12px;padding-top: 48px;">
         <div class="row mb-5" style="height: 200px;">
             <div class="col-md-8 col-xl-6 text-center mx-auto" style="height: 200px;">
-                <h2 class="fw-bold" style="font-size: 60px;"><a href="/survey"><strong>Get Started</strong></a></h2>
-                <p class="text-muted" style="font-size: 32px;color: var(--bs-emphasis-color);">Decide Your Next Bite!</p>
+                { #if $page.data.authInfo }
+                    <h2 class="fw-bold" style="font-size: 60px;"><a href="/survey"><strong>Decide Your Next Bite!</strong></a></h2>
+                    <RecipeTable />
+                { :else }
+                    <h2 class="fw-bold" style="font-size: 60px;"><a href="/survey"><strong>Get Started</strong></a></h2>
+                    <p class="text-muted" style="font-size: 32px;color: var(--bs-emphasis-color);">Decide Your Next Bite!</p>
+                { /if }
             </div>
         </div>
+        <p style=" margin: auto; text-align:center; font-size: 1.6rem;">Submitted for VTHacks-12</p>
     </div>
 </section>
-<section class="py-5">
-    <section class="py-5">
-        <div class="container text-center py-5">
-            <p class="mb-4" style="font-size: 1.6rem;">Submitted for VTHacks-12</p>
-        </div>
-    </section>
-</section>
-
-<style>
-
-</style>

@@ -8,6 +8,7 @@ export default class RecipeAPI extends APIRoute {
     constructor() {
         super('/recipes');
 
+        this.addSubRoute('/bulk', 'get', this.bulk);
         this.addSubRoute('/create', 'post', this.createRecipe);
         this.addSubRoute('/:id', 'get', this.get);
         this.addSubRoute('/:id/rate', 'post', this.rate);
@@ -18,6 +19,15 @@ export default class RecipeAPI extends APIRoute {
 
         let result = await db.get(req.params.id);
 
+        res.send(result);
+    }
+
+    async bulk(req, res) {
+
+        let userID = req.query.userID;
+        let db = req.app.get('mongo').recipes;
+
+        let result = await db.getAll({ userID: userID });
         res.send(result);
     }
 

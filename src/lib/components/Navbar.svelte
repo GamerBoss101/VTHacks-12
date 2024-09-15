@@ -15,7 +15,7 @@
             { #if $page.data.authInfo }
                 <a class="btn btn-primary shadow" role="button" href="https://auth.fooddecisive.co/account" style="background: rgb(55, 99, 244);">Dashboard</a>
             { :else }
-                <a class="btn btn-primary shadow" role="button" href="https://auth.fooddecisive.co/" style="background: rgb(55, 99, 244);">Sign up</a>
+                <a class="btn btn-primary shadow" role="button" href="https://auth.fooddecisive.co/" style="background: rgb(55, 99, 244);">Sign In</a>
             { /if }
         </div>
     </div>

@@ -8,10 +8,12 @@
 
     import SignIn from './SignIn.svelte';
 
+    console.log($page.data.authInfo);
+
     let formData = writable({
         answers: [],
         currentQuestion: 1,
-        userID: $page.data.authInfo ? $page.data.authInfo.id : null,
+        userID: $page.data.authInfo.user.userId || null,
     });
 
     export let numQuestion = 0;
@@ -91,7 +93,7 @@
     }
 
     function signIn() {
-        goto("https://auth.fooddecisive.co/");
+        location.href = 'https://auth.fooddecisive.co/';
     }
     
 
